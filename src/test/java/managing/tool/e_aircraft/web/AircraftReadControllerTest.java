@@ -65,11 +65,11 @@ public class AircraftReadControllerTest {
 
         aircraftRepository.save(aircraftEntity);
     }
-
-    @Test
-    @WithMockCustomUser(companyNum = "N90909")
-    void returnAllAircraft() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get(REQUEST_MAPPING_AIRCRAFT +"/all"))
-                .andExpect(status().isOk());
-    }
+//
+//    @Test
+//    @WithMockCustomUser(companyNum = "N90909")
+//    void returnAllAircraft() throws Exception {
+//        mockMvc.perform(MockMvcRequestBuilders.get(REQUEST_MAPPING_AIRCRAFT +"/all"))
+//                .andExpect(status().isOk());
+//    }
 }
