@@ -1,0 +1,23 @@
+[
+  {
+    "firstName": "Petya",
+    "lastName": "Kuzmanova",
+    "companyNum": "N90909",
+    "email": "petya.kuzmanova@companyEmail.org",
+    "role": "admin"
+  },
+  {
+    "firstName": "Ivan",
+    "lastName": "Ivanov",
+    "companyNum": "N60606",
+    "email": "ivan.ivanov@companyEmail.org",
+    "role": "admin"
+  },
+  {
+    "firstName": "Stefan",
+    "lastName": "Ivanov",
+    "companyNum": "N70707",
+    "email": "stefan.ivanov@companyEmail.org",
+    "role": "user"
+  }
+]
