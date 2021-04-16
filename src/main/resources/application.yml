@@ -33,3 +33,8 @@ spring:
 carousel:
   images: aerosmith.jpeg, iron.jpeg, madonna.jpg, metallica.jpg, queen.jpg, rolling.jpeg
   refresh-cron: "0 */10 * * * *"
+
+  cloudinary:
+    cloud-name= drkc1zfxf
+    api-key= 575529755819115
+    api-secret=${CLOUD_SECRET}
