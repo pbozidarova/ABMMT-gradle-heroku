@@ -2,7 +2,8 @@ package managing.tool.constants;
 
 public class GlobalConstants {
 
-    public static final String FRONTEND_URL = "http://localhost:3200";
+    public static final String FRONTEND_URL = "https://abmmt-fe.herokuapp.com";
+//    public static final String FRONTEND_URL = "http://localhost:3200";
     public static final String DUMMY_PASS = "1234";
 
     public static final String FOUNDERROR = "%s already exists!";
