@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.time.LocalDateTime;
 import java.util.*;
 
 import static managing.tool.constants.GlobalConstants.USERS_MOCK_DATA_PATH;
@@ -48,18 +49,36 @@ public class UserSeedServiceImpl implements UserSeedService {
                         UserEntity user = this.modelMapper.map(uDto, UserEntity.class);
                         //TODO randomly allocate ADMIN or USER and ENG or MECH
 
-                        RoleEntity role = this.roleService.findByName(uDto.getRole().toUpperCase());
                         Set<RoleEntity> roleSet = new HashSet<>();
-                        roleSet.add(role);
-                        user.setRoles(roleSet);
-                        user.setCompanyNum(uDto.getCompanyNum());
-//                    user.setFacility(this.facilitySeedService.getRandomFacility());
-                        user.setPassword(passwordEncoder.encode(GlobalConstants.DUMMY_PASS));
+                        RoleEntity authority = this.roleService.findByName(uDto.getRole().toUpperCase());
+                        roleSet.add(authority);
+                        allocateRole(roleSet, uDto.getCompanyNum());
+                        user.setRoles(roleSet)
+                            .setCompanyNum(uDto.getCompanyNum())
+                            .setPassword(passwordEncoder.encode(GlobalConstants.DUMMY_PASS))
+                            .setCreatedOn(LocalDateTime.now());
+
                         this.userRepository.saveAndFlush(user);
                     });
         }catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    private Set<RoleEntity> allocateRole(Set<RoleEntity> roleSet, String companyNum){
+        RoleEnum role;
+
+        if(companyNum.equals("N90909")){
+           role = RoleEnum.ENGINEER;
+        }else if(companyNum.equals("N70707")){
+            role = RoleEnum.MECHANIC;
+        }else {
+           role = this.roleService.isMechanic() ? RoleEnum.MECHANIC : RoleEnum.ENGINEER;
+        }
+
+        roleSet.add(this.roleService.findByName(role.toString()));
+
+        return roleSet;
     }
 
     @Override

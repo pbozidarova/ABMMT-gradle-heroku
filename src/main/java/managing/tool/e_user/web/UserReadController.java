@@ -1,5 +1,6 @@
 package managing.tool.e_user.web;
 
+import lombok.AllArgsConstructor;
 import managing.tool.e_facility.service.FacilityService;
 import managing.tool.e_maintenance.web.MaintenanceReadController;
 import managing.tool.e_notification.web.NotificationREADController;
@@ -24,16 +25,10 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RestController
 @RequestMapping("/users")
 @CrossOrigin(FRONTEND_URL)
+@AllArgsConstructor
 public class UserReadController {
     private final UserService userService;
-    private final UserCreateUpdateService userCreateUpdateService;
     private final FacilityService facilityService;
-
-    public UserReadController(UserService userService, UserCreateUpdateService userCreateUpdateService, FacilityService facilityService) {
-        this.userService = userService;
-        this.userCreateUpdateService = userCreateUpdateService;
-        this.facilityService = facilityService;
-    }
 
     @GetMapping("all")
     public ResponseEntity<CollectionModel<EntityModel<UserViewDto>>> allUsers(){
@@ -86,7 +81,7 @@ public class UserReadController {
         Link tasksLink = linkTo(methodOn(TaskReadController.class)
                             .tasksPreparedBy(user.getCompanyNum()))
                             .withRel("tasks")
-                            .withTitle(String.format("Tasks that have been prepared by team in which %s - %s, %s has taken part!", user.getCompanyNum(), user.getFirstName(), user.getLastName()));
+                            .withTitle(String.format("Tasks that have been prepared by team in which %s - %s, %s has taken part!", user.getCompanyNum(), user.getLastName(), user.getFirstName()));
 
         result.add(tasksLink);
 
